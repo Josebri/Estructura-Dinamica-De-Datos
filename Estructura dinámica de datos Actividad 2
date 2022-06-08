@@ -1,0 +1,71 @@
+#include <iostream>
+#include <stdlib.h>
+
+int alumnos,genero, masculino, femenino, respuesta;
+float *generoAlumnos;
+void entrada(),entrada2(),salida();
+
+main()
+{
+	entrada();
+	entrada2();
+	salida();
+	free(generoAlumnos);
+}
+
+void entrada()
+{
+    printf("Ingrese la cantidad de alumnos en el salon\n");
+    scanf("%d", &alumnos);
+    generoAlumnos=(float *)malloc(alumnos*sizeof(float));
+}
+
+void entrada2()
+{
+	for(int i=0;i<alumnos;i++)
+	{
+		printf("\nSi el alumno es masculino [1] - si el alumno es femenino [2]\n");
+		scanf("%d",&genero);
+		generoAlumnos[i]=genero;
+		if(genero==1)
+		{
+			printf("El alumno [%d] es masculino\n\n",i+1);
+			masculino = masculino + 1;
+		}
+		else
+		{
+			printf("El alumno [%d] es femenino\n\n",i+1);
+			femenino = femenino + 1;
+		}	
+	}
+	
+	for(int i=0;i<alumnos;i++)
+	{
+		if(generoAlumnos[i]==1)
+		{
+			printf("\nEl alumno [%d] es masculino\n",i+1);
+		
+		}
+		else
+		{
+			printf("\nEl alumno [%d] es femenino\n",i+1);
+		
+		}	
+	}
+}
+
+void salida()
+{
+	printf("\nCantidad de alumnos masculino: %d",masculino);
+	printf("\nCantidad de alumnos femenino: %d",femenino);
+	if(masculino>femenino)
+	{
+		*generoAlumnos= (masculino*100)/alumnos;
+		printf("\nPorcentaje de alumnos masculinos: %.2f",*generoAlumnos);
+	}
+	else
+	{
+		*generoAlumnos= (femenino*100)/alumnos;
+		printf("\nPorcentaje de alumnos femeninos: %.2f",*generoAlumnos);
+	}
+}
